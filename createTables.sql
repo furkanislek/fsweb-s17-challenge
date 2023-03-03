@@ -1,5 +1,3 @@
--- Tasarımını yaptığınız tabloları oluşturan sql ifadeleri buraya yazınız.
--- veri tiplerine, nullable olma durumuna, default değerine ve tablolar arası foreign key kullanımına dikkat.
 create table kullanici (
     id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
     adi TEXT NOT NULL,
@@ -20,8 +18,6 @@ create table ilanlar (
     CONSTRAINT kategoriIdFk FOREIGN KEY (kategoriID) REFERENCES kategoriler(id)
 );
 
-DROP TABLE ilanlar;
-
 create table kategoriler (
     id int PRIMARY KEY NOT NULL AUTO_INCREMENT,
     kategori_name Text
@@ -32,6 +28,16 @@ create table sepet (
     ürün TEXT NOT NULL,
     fiyat int NOT NULL
 );
+
+ALTER TABLE
+    sepet
+ADD
+    COLUMN kullanici_id INT NOT NULL;
+
+ALTER TABLE
+    sepet
+ADD
+    CONSTRAINT sepet_kullanici_id FOREIGN KEY (kullanici_id) REFERENCES kullanici(id);
 
 create table alt_kategoriler (
     id int PRIMARY KEY NOT NULL AUTO_INCREMENT,
